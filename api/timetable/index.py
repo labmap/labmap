@@ -1,4 +1,4 @@
-#!/home/students/inf/t/tm385898/public_html/labmap/venv/bin/python
+#!/home/students/inf/t/tm385898/miniconda3/envs/labmap/bin/python
 
 import cgi
 import sys
