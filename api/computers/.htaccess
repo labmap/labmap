@@ -1,0 +1,6 @@
+AddHandler cgi-script .py
+Options +ExecCGI
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ index.py?room=$1 [QSA,L]

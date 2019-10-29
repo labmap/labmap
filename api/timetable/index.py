@@ -2,34 +2,18 @@
 
 import cgi
 import sys
-import timetable
+sys.path.append("../..")
 
-HEADERS = [
-    'Status: 200 OK',
-    'Content-Type: application/json; charset=utf8',
-    'Access-Control-Allow-Origin: *'
-]
+from api.utils import print_headers, cgi_print, get_url_params
+from api.timetable.timetable import get_timetable
+
 
 sys.stderr = sys.stdout
 
 
-def cgi_print(string=''):
-    byte_string = (string + '\n').encode()
-    sys.stdout.buffer.write(byte_string)
-
-
-def print_headers():
-    for header in HEADERS:
-        cgi_print(header)
-    cgi_print()
-    sys.stdout.flush()
-
-
 if __name__ == '__main__':
     print_headers()
-    query_parameters = cgi.FieldStorage()
-    room_number = query_parameters.getvalue('room')
-    weekday = query_parameters.getvalue('weekday')
-    result = timetable.get_timetable(room_number, weekday)
+    room, weekday = get_url_params('room', 'weekday')
+    result = get_timetable(room, weekday)
     cgi_print(result)
     sys.stdout.flush()
